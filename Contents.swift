@@ -112,36 +112,48 @@ IntegerArraysTest.defaultTestSuite.run()
 //
 //printIfPositiveInteger(number: "10")
 
-//2 guard statements
-func printIfPositiveInteger(number: String) {
+class PositiveInteger {
+    //2 guard statements
+    func printIfPositiveInteger(number: String) -> Int {
 
-    guard let value = Int(number) else {
-        return
+        guard let value = Int(number) else {
+            return -1
+        }
+
+        guard value > 0 else {return -1}
+
+        return value
+
     }
+    
+    //1 compound guard statement
+    func printIfPositiveIntegerCompound(number: String) -> Int {
 
-    guard value > 0 else {return}
+        guard let value = Int(number), value>0 else {
+            return -1
+        }
+        return value
 
-    print(value)
+    }
 
 }
 
-printIfPositiveInteger(number: "abc")
-
-printIfPositiveInteger(number: "-10")
-
-printIfPositiveInteger(number: "10")
-//1 compound guard statement
-func printIfPositiveIntegerCompound(number: String) {
-
-    guard let value = Int(number), value>0 else {
-        return
+class PositiveIntegerTest: XCTestCase {
+    func testAll() throws {
+        let positiveInteger = PositiveInteger()
+        let integerHere = positiveInteger.printIfPositiveInteger(number: "abc")
+        let integerInmmediate = positiveInteger.printIfPositiveInteger(number: "-10")
+        let integerLater = positiveInteger.printIfPositiveInteger(number: "10")
+        let integerCompundHere = positiveInteger.printIfPositiveIntegerCompound(number: "abc")
+        let integerCompundInmmediate = positiveInteger.printIfPositiveIntegerCompound(number: "-10")
+        let integerCompundLater = positiveInteger.printIfPositiveIntegerCompound(number: "10")
+        XCTAssertEqual(-1, integerHere)
+        XCTAssertEqual(-1, integerInmmediate)
+        XCTAssertEqual(10, integerLater)
+        XCTAssertEqual(-1, integerCompundHere)
+        XCTAssertEqual(-1, integerCompundInmmediate)
+        XCTAssertEqual(10, integerCompundLater)
     }
-    print(value)
-
 }
 
-printIfPositiveIntegerCompound(number: "abc")
-
-printIfPositiveIntegerCompound(number: "-10")
-
-printIfPositiveIntegerCompound(number: "10")
+PositiveIntegerTest.defaultTestSuite.run()
