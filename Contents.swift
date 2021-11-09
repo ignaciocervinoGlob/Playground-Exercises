@@ -61,22 +61,32 @@ DistanceCalculatorTest.defaultTestSuite.run()
 //Result:
 //
 //“There are 2 numbers lower and 2 greater than 100”
-
-func greaterNumbers(array: [Int], number: Int) -> (Void) {
-    var lower = 0
-    var greater = 0
-    for i in array{
-        if (i>number) {
-            greater+=1
+class IntegerArrays {
+    func greaterNumbers(array: [Int], number: Int) -> String {
+        var lower = 0
+        var greater = 0
+        for i in array{
+            if (i>number) {
+                greater+=1
+            }
+            else if (i<number) {
+                lower+=1
+            }
         }
-        else if (i<number) {
-            lower+=1
-        }
+        return "There are \(lower) numbers lower and \(greater) greater than \(number)"
     }
-    print("There are \(lower) numbers lower and \(greater) greater than \(number)")
 }
 
-greaterNumbers(array: [110, 20, 100, 0, 200], number: 100)
+class IntegerArraysTest: XCTestCase {
+    func testAll() throws {
+        let numbers = IntegerArrays()
+        let numbersStringHere = numbers.greaterNumbers(array: [110, 20, 100, 0, 200], number: 100)
+        XCTAssertEqual("There are 2 numbers lower and 2 greater than 100", numbersStringHere)
+    }
+}
+
+IntegerArraysTest.defaultTestSuite.run()
+
 
 //Exercise 3:
 //
