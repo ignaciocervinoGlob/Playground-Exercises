@@ -66,11 +66,11 @@ class IntegerArrays {
         var lower = 0
         var greater = 0
         for i in array{
-            if (i>number) {
-                greater+=1
+            if i > number {
+                greater += 1
             }
-            else if (i<number) {
-                lower+=1
+            else if i < number {
+                lower += 1
             }
         }
         return "There are \(lower) numbers lower and \(greater) greater than \(number)"
@@ -114,7 +114,7 @@ IntegerArraysTest.defaultTestSuite.run()
 
 class PositiveInteger {
     //2 guard statements
-    func printIfPositiveInteger(number: String) -> Int {
+    func returnIfPositive(number: String) -> Int {
 
         guard let value = Int(number) else {
             return -1
@@ -127,9 +127,9 @@ class PositiveInteger {
     }
     
     //1 compound guard statement
-    func printIfPositiveIntegerCompound(number: String) -> Int {
+    func returnIfPositiveCompound(number: String) -> Int {
 
-        guard let value = Int(number), value>0 else {
+        guard let value = Int(number), value > 0 else {
             return -1
         }
         return value
@@ -141,12 +141,12 @@ class PositiveInteger {
 class PositiveIntegerTest: XCTestCase {
     func testAll() throws {
         let positiveInteger = PositiveInteger()
-        let integerHere = positiveInteger.printIfPositiveInteger(number: "abc")
-        let integerInmmediate = positiveInteger.printIfPositiveInteger(number: "-10")
-        let integerLater = positiveInteger.printIfPositiveInteger(number: "10")
-        let integerCompundHere = positiveInteger.printIfPositiveIntegerCompound(number: "abc")
-        let integerCompundInmmediate = positiveInteger.printIfPositiveIntegerCompound(number: "-10")
-        let integerCompundLater = positiveInteger.printIfPositiveIntegerCompound(number: "10")
+        let integerHere = positiveInteger.returnIfPositive(number: "abc")
+        let integerInmmediate = positiveInteger.returnIfPositive(number: "-10")
+        let integerLater = positiveInteger.returnIfPositive(number: "10")
+        let integerCompundHere = positiveInteger.returnIfPositiveCompound(number: "abc")
+        let integerCompundInmmediate = positiveInteger.returnIfPositiveCompound(number: "-10")
+        let integerCompundLater = positiveInteger.returnIfPositiveCompound(number: "10")
         XCTAssertEqual(-1, integerHere)
         XCTAssertEqual(-1, integerInmmediate)
         XCTAssertEqual(10, integerLater)
