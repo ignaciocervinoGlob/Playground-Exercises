@@ -61,22 +61,32 @@ DistanceCalculatorTest.defaultTestSuite.run()
 //Result:
 //
 //“There are 2 numbers lower and 2 greater than 100”
-
-func greaterNumbers(array: [Int], number: Int) -> (Void) {
-    var lower = 0
-    var greater = 0
-    for i in array{
-        if (i>number) {
-            greater+=1
+class IntegerArrays {
+    func greaterNumbers(array: [Int], number: Int) -> String {
+        var lower = 0
+        var greater = 0
+        for i in array{
+            if i > number {
+                greater += 1
+            }
+            else if i < number {
+                lower += 1
+            }
         }
-        else if (i<number) {
-            lower+=1
-        }
+        return "There are \(lower) numbers lower and \(greater) greater than \(number)"
     }
-    print("There are \(lower) numbers lower and \(greater) greater than \(number)")
 }
 
-greaterNumbers(array: [110, 20, 100, 0, 200], number: 100)
+class IntegerArraysTest: XCTestCase {
+    func testAll() throws {
+        let numbers = IntegerArrays()
+        let numbersStringHere = numbers.greaterNumbers(array: [110, 20, 100, 0, 200], number: 100)
+        XCTAssertEqual("There are 2 numbers lower and 2 greater than 100", numbersStringHere)
+    }
+}
+
+IntegerArraysTest.defaultTestSuite.run()
+
 
 //Exercise 3:
 //
@@ -102,36 +112,48 @@ greaterNumbers(array: [110, 20, 100, 0, 200], number: 100)
 //
 //printIfPositiveInteger(number: "10")
 
-//2 guard statements
-func printIfPositiveInteger(number: String) {
+class PositiveInteger {
+    //2 guard statements
+    func returnIfPositive(number: String) -> Int {
 
-    guard let value = Int(number) else {
-        return
+        guard let value = Int(number) else {
+            return -1
+        }
+
+        guard value > 0 else {return -1}
+
+        return value
+
     }
+    
+    //1 compound guard statement
+    func returnIfPositiveCompound(number: String) -> Int {
 
-    guard value > 0 else {return}
+        guard let value = Int(number), value > 0 else {
+            return -1
+        }
+        return value
 
-    print(value)
+    }
 
 }
 
-printIfPositiveInteger(number: "abc")
-
-printIfPositiveInteger(number: "-10")
-
-printIfPositiveInteger(number: "10")
-//1 compound guard statement
-func printIfPositiveIntegerCompound(number: String) {
-
-    guard let value = Int(number), value>0 else {
-        return
+class PositiveIntegerTest: XCTestCase {
+    func testAll() throws {
+        let positiveInteger = PositiveInteger()
+        let integerHere = positiveInteger.returnIfPositive(number: "abc")
+        let integerInmmediate = positiveInteger.returnIfPositive(number: "-10")
+        let integerLater = positiveInteger.returnIfPositive(number: "10")
+        let integerCompundHere = positiveInteger.returnIfPositiveCompound(number: "abc")
+        let integerCompundInmmediate = positiveInteger.returnIfPositiveCompound(number: "-10")
+        let integerCompundLater = positiveInteger.returnIfPositiveCompound(number: "10")
+        XCTAssertEqual(-1, integerHere)
+        XCTAssertEqual(-1, integerInmmediate)
+        XCTAssertEqual(10, integerLater)
+        XCTAssertEqual(-1, integerCompundHere)
+        XCTAssertEqual(-1, integerCompundInmmediate)
+        XCTAssertEqual(10, integerCompundLater)
     }
-    print(value)
-
 }
 
-printIfPositiveIntegerCompound(number: "abc")
-
-printIfPositiveIntegerCompound(number: "-10")
-
-printIfPositiveIntegerCompound(number: "10")
+PositiveIntegerTest.defaultTestSuite.run()
